@@ -1,0 +1,50 @@
+spring:
+  profiles:
+    active: dev
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    
+logging:
+  level:
+    org:
+      springframework: DEBUG
+
+---    
+# Spring Profile for dev env with in-memory H2 database 
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: jdbc:h2:mem:powerplantdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password: 
+  h2:
+    console:
+      enabled: true
+      path: /h2-ui
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+  
+---        
+# Spring Profile for prod env with postgresql database
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    #url: jdbc:postgresql://dpg-{custom-url}.render.com:5432/{name_database}
+    url: jdbc:postgresql://dpg-cjlg8g7v9s6c73csp180-a.oregon-postgres.render.com:5432/powerplantdb
+    driverClassName: org.postgresql.Driver
+    username: admin
+    password: BMoOvF4AECha5SmsZ8XLMko8io4YoJyD
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    
