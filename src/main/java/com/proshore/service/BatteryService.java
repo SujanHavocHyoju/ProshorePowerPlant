@@ -1,6 +1,7 @@
 package com.proshore.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,9 +20,17 @@ public class BatteryService {
 		return batteryList;
 	}
 	
+	public Battery addBattery(Battery battery) {
+		return batteryRepository.save(battery);
+	}
+	
 	public String addBatteries(List<Battery> batteryList) {
 		batteryRepository.saveAll(batteryList);
 		return "Inserted " + batteryList.size() + " battery records into the database";
+	}
+	
+	public Optional<Battery> findByName(String name){
+		return batteryRepository.findByName(name);
 	}
 	
 	public List<Battery> findBatteryByPostcodeRange(String from, String to){
