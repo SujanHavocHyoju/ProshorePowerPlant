@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.proshore.dto.BatteryDTO;
+import com.proshore.exception.BatteryNotFoundException;
 import com.proshore.model.Battery;
 import com.proshore.service.BatteryService;
 import com.proshore.util.BatteryMapper;
@@ -32,11 +33,15 @@ public class BatteryController {
 	
     @GetMapping
     public List<BatteryDTO> getAllPersons() {
-    	 return batteryService.getAllBatteries().stream()
-				.map(batteryItem -> {
-					return batteryMapper.toDto(batteryItem);
-				})
-				.collect(Collectors.toList());
+    	List<BatteryDTO> batteries = batteryService.getAllBatteries()
+    									.stream()
+										.map(batteryItem -> {
+											return batteryMapper.toDto(batteryItem);
+										})
+										.collect(Collectors.toList());
+    	if(batteries.isEmpty())
+    		throw new BatteryNotFoundException("No Battery records found.");
+    	return batteries;
     }
     
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -54,6 +59,8 @@ public class BatteryController {
     @GetMapping("/search")
     public Map<String, Object> getBatteries(@RequestParam String fromPostcode, @RequestParam String toPostcode) {
         List<Battery> batteriesList = batteryService.findBatteryByPostcodeRange(fromPostcode, toPostcode);
+        if(batteriesList.isEmpty())
+    		throw new BatteryNotFoundException("No Battery records found matching your parameters.");
         List<String> names = batteriesList.stream()
         							.map(Battery::getName)
         							.sorted()

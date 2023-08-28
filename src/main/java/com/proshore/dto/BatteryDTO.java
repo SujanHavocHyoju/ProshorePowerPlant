@@ -1,8 +1,5 @@
 package com.proshore.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,10 +8,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class BatteryDTO {
-	@JsonProperty("name")
+//	@JsonProperty("name")
 	private String name;
-	@JsonProperty("postcode")
+//	@JsonProperty("postcode")
 	private String postcode;
-	@JsonProperty("capacity")
+//	@JsonProperty("capacity")
 	private Long capacity;
 }

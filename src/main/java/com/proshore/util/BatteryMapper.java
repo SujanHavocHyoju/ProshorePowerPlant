@@ -7,6 +7,7 @@ import com.proshore.model.Battery;
 
 @Component
 public class BatteryMapper {
+	//Manual Mapper logic instead of MapStruct or ModelMapper 
 	public BatteryDTO toDto(Battery entity) {
 		BatteryDTO dto = new BatteryDTO();
         dto.setName(entity.getName());
