@@ -1,0 +1,6 @@
+com\proshore\TestUtils.class
+com\proshore\controller\BatteryControllerTests.class
+com\proshore\repository\BatteryRepositoryTest.class
+com\proshore\service\BatteryServiceTest.class
+com\proshore\util\BatteryMapperTest.class
+com\proshore\ProshorePowerPlantApplicationTests.class

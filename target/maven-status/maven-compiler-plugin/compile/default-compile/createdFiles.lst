@@ -1,0 +1,12 @@
+com\proshore\controller\BatteryController.class
+com\proshore\util\BatteryMapper.class
+com\proshore\service\BatteryService.class
+com\proshore\exception\ExceptionResponse.class
+com\proshore\ProshorePowerPlantApplication.class
+com\proshore\configuration\BatterySwaggerAPI.class
+com\proshore\configuration\SwaggerConfig.class
+com\proshore\dto\BatteryDTO.class
+com\proshore\exception\CustomResponseEntityExceptionHandler.class
+com\proshore\exception\BatteryNotFoundException.class
+com\proshore\model\Battery.class
+com\proshore\repository\BatteryRepository.class
