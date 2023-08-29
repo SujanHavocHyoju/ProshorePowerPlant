@@ -17,7 +17,7 @@ import com.proshore.model.Battery;
  */
 @DataJpaTest
 class BatteryRepositoryTest extends TestUtils{
-
+	
 	@Autowired
 	private BatteryRepository repository;
 	

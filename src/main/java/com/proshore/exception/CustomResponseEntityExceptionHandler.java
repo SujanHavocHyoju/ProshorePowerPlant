@@ -21,8 +21,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptionHandler{
 
 	@ExceptionHandler(Exception.class)
-    //override method of ResponseEntityExceptionHandler class : for all Exceptions
-    public final ResponseEntity<Object> handleAllExceptions(Exception ex, WebRequest request) {
+	//override method of ResponseEntityExceptionHandler class : for all Exceptions
+	public final ResponseEntity<Object> handleAllExceptions(Exception ex, WebRequest request) {
         //creating exception response structure
         ExceptionResponse exceptionResponse
                 = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
