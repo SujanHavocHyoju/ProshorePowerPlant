@@ -28,10 +28,14 @@ import com.proshore.model.Battery;
 import com.proshore.service.BatteryService;
 import com.proshore.util.BatteryMapper;
 
-//@RunWith(SpringRunner.class)
-@WebMvcTest(BatteryController.class) //Specifying the controller we want to test.
+/**
+ * Testing BatteryController end points using MockMVC
+ * Specifying the controller we want to test
+ */
+@WebMvcTest(BatteryController.class) 
 public class BatteryControllerTests extends TestUtils{
 	
+	// Endpoints to use
 	private static final String API_ENDPOINT = "/api/v1/batteries";
 	private static final String API_ENDPOINT_ADD = "/api/v1/batteries/add";
 	private static final String API_ENDPOINT_SEARCHBY_POSTCODERANGE = "/api/v1/batteries/search";
@@ -61,7 +65,7 @@ public class BatteryControllerTests extends TestUtils{
 				.andExpect(status().isOk())
 				.andExpect(jsonPath("$.length()", is(3)))
 				.andDo(print())
-				.andExpect(jsonPath("$[0].name", is("HighWatt")))
+				.andExpect(jsonPath("$[0].name", is("Henderson")))
 				.andExpect(jsonPath("$[0].postcode", is("1550")));
 	}
 	
@@ -86,8 +90,8 @@ public class BatteryControllerTests extends TestUtils{
 						.param("toPostcode", "2000"))
 				.andExpect(status().isOk())
 				.andDo(print())
-				.andExpect(jsonPath("$.batteries[0]", is("Everready")))
-                .andExpect(jsonPath("$.batteries[1]", is("HighWatt")))
+				.andExpect(jsonPath("$.batteries[0]", is("El Paso")))
+                .andExpect(jsonPath("$.batteries[1]", is("Henderson")))
                 .andExpect(jsonPath("$.totalWattCapacity", is(5000.0)))
                 .andExpect(jsonPath("$.avgWattCapacity", is(2500.0))); 
 		
@@ -96,14 +100,13 @@ public class BatteryControllerTests extends TestUtils{
 	@Test
 	void get_request_should_return_battery_by_name() throws Exception {
 		BatteryDTO batteryDto = generateBatteryDTO();
-		when(batteryService.findByName("HighWatt")).thenReturn(Optional.of(generateBattery()));
-//		when(batteryMapper.toDto(battery)).thenReturn(batteryDto);
+		when(batteryService.findByName("Henderson")).thenReturn(Optional.of(generateBattery()));
 		when(batteryMapper.toDto(any(Battery.class))).thenReturn(batteryDto);
 
-		mockMvc.perform(get(API_ENDPOINT_SEARCHBY_NAME).param("name", "HighWatt"))
+		mockMvc.perform(get(API_ENDPOINT_SEARCHBY_NAME).param("name", "Henderson"))
 				.andExpect(status().isOk())
 				.andDo(print())
-				.andExpect(jsonPath("$.name", is("HighWatt")));
+				.andExpect(jsonPath("$.name", is("Henderson")));
 	}
 	
 	@Test
@@ -119,7 +122,7 @@ public class BatteryControllerTests extends TestUtils{
 						.content(objectMapper.writeValueAsString(batteryDto)))
 				.andExpect(status().isCreated())
 				.andDo(print())
-				.andExpect(jsonPath("$.name", is("HighWatt")));
+				.andExpect(jsonPath("$.name", is("Henderson")));
 	}
 
 }

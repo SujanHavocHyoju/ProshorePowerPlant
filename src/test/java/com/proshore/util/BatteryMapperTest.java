@@ -11,7 +11,8 @@ import com.proshore.TestUtils;
 import com.proshore.dto.BatteryDTO;
 import com.proshore.model.Battery;
 
-/* Indicates that this is a Spring Boot test 
+/* 
+ * Indicates that this is a Spring Boot test 
  * and loads the BatteryMapper class into the application context.
  */
 @SpringBootTest(classes = BatteryMapper.class)

@@ -18,6 +18,9 @@ import com.proshore.TestUtils;
 import com.proshore.model.Battery;
 import com.proshore.repository.BatteryRepository;
 
+/**
+ * Testing BatteryService using Mockito
+ */
 @ExtendWith(MockitoExtension.class)
 class BatteryServiceTest extends TestUtils{
 	
@@ -54,10 +57,10 @@ class BatteryServiceTest extends TestUtils{
 	@Test
 	void findByName_should_return_battery() {
 		Battery newBattery = generateBattery();
-		when(batteryRepository.findByName("HighWatt")).thenReturn(Optional.of(newBattery));
-		Optional<Battery> returnedBattery = batteryService.findByName("HighWatt");
+		when(batteryRepository.findByName("Henderson")).thenReturn(Optional.of(newBattery));
+		Optional<Battery> returnedBattery = batteryService.findByName("Henderson");
 		assertEquals(newBattery.getName(), returnedBattery.get().getName());
-		verify(batteryRepository).findByName("HighWatt");
+		verify(batteryRepository).findByName("Henderson");
 	}
 	
 	@Test

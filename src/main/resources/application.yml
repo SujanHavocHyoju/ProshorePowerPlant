@@ -8,8 +8,12 @@ spring:
     
 logging:
   level:
-    org:
-      springframework: DEBUG
+    root: INFO
+  file:
+    name: proshore.log
+  pattern:
+    console: "%d [%t] %-5level %logger{36} - %msg%n"
+    file: "%d [%t] %-5level %logger{36} - %msg%n"
 
 ---    
 # Spring Profile for dev env with in-memory H2 database 
@@ -38,7 +42,6 @@ spring:
     activate:
       on-profile: prod
   datasource:
-    #url: jdbc:postgresql://dpg-{custom-url}.render.com:5432/{name_database}
     url: jdbc:postgresql://dpg-cjlg8g7v9s6c73csp180-a.oregon-postgres.render.com:5432/powerplantdb
     driverClassName: org.postgresql.Driver
     username: admin

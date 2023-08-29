@@ -12,6 +12,9 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import com.proshore.TestUtils;
 import com.proshore.model.Battery;
 
+/**
+ * Testing BatteryRepository with @DataJpaTest 
+ */
 @DataJpaTest
 class BatteryRepositoryTest extends TestUtils{
 
@@ -35,7 +38,7 @@ class BatteryRepositoryTest extends TestUtils{
 		Battery newBattery = generateBattery();
 		Battery storedBattery = repository.save(newBattery);
 		assertNotNull(storedBattery);
-		assertEquals("HighWatt", storedBattery.getName());
+		assertEquals("Henderson", storedBattery.getName());
 	}
 	
 	@Test
@@ -55,7 +58,7 @@ class BatteryRepositoryTest extends TestUtils{
 	@Test
 	void findByName_should_return_battery() {
 		insertDummyData();
-		Optional<Battery> battery = repository.findByName("Duracell");
+		Optional<Battery> battery = repository.findByName("Denver");
 		assertTrue(battery.isPresent());
 	}
 

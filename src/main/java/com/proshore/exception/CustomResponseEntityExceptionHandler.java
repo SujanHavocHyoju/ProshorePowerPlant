@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-// To make it applicable/shared across all other controllers
+/**
+ * Custom ResponseEntity exception handler
+ * to make it applicable/shared across all other controllers
+ */
 @ControllerAdvice
 @RestController
 public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptionHandler{
@@ -28,7 +31,7 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
     }
 	
 	@ExceptionHandler(BatteryNotFoundException.class)
-    //override method of ResponseEntityExceptionHandler class : only for UserNotFoundException 
+    //override method of ResponseEntityExceptionHandler class : only for BatteryNotFoundException 
     public final ResponseEntity<Object> handleUserNotFoundException(BatteryNotFoundException ex, WebRequest request) {
         //creating exception response structure
         ExceptionResponse exceptionResponse
@@ -41,11 +44,9 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
 		//creating exception response structure
         ExceptionResponse exceptionResponse
-        = new ExceptionResponse(new Date(), "Validation Failed.", ex.getBindingResult().toString());
-                //= new ExceptionResponse(new Date(), ex.getMessage(), ex.getBindingResult().toString());
+        = new ExceptionResponse(new Date(), "Validation Failed. " +ex.getMessage(), ex.getBindingResult().toString());
         //returning exception structure and Bad Request status
         return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
 	}
-	
 	
 }
