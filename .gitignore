@@ -1,5 +1,9 @@
 HELP.md
-proshore**
+#target/
+#!.mvn/wrapper/maven-wrapper.jar
+#!**/src/main/**/target/
+#!**/src/test/**/target/
+proshore.log**
 
 ### STS ###
 .apt_generated
