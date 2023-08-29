@@ -66,7 +66,7 @@ Have utilized **Log4j2** implementation to log informative messages at the **INF
 
 ## Project Demo
 
-The projects has been deployed on Render Free Tier web services:
+The projects have been deployed on Render Free Tier web services:
 
 - Profile 1 (dev): [ProshorePowerPlantH2 Demo](https://proshorepowerplanth2.onrender.com)
 - Profile 2 (prod): [ProshorePowerPlantPgSQL Demo](https://proshorepowerplantpgsql.onrender.com)
@@ -74,7 +74,7 @@ The projects has been deployed on Render Free Tier web services:
 Render deployment requires a **Dockerfile** in the project root directory:
 
 ```
-Dockerfile
+#Dockerfile
 FROM eclipse-temurin:17-jdk-alpine
 VOLUME /tmp
 COPY target/*.jar ProshorePowerPlant-v1.jar
