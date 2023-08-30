@@ -73,27 +73,24 @@ public class BatteryControllerTests extends TestUtils{
 	void get_request_should_get_filtered_battery_list() throws Exception {
 		List<Battery> batteryList = generateBatteryList();
 		List<Battery> filteredList = batteryList.stream()
-												.filter( b -> {
-													try {
-										                int postcode = Integer.parseInt(b.getPostcode());
-										                return postcode > 1000 && postcode < 2000;
-										            } catch (NumberFormatException e) {
-										                return false;
-										            }
-												})
-												.collect(Collectors.toList());
+				.filter(b -> {
+					try {
+						int postcode = Integer.parseInt(b.getPostcode());
+						return postcode > 1000 && postcode < 2000;
+					} catch (NumberFormatException e) {
+						return false;
+					}
+				}).collect(Collectors.toList());
 		when(batteryService.findBatteryByPostcodeRange(anyString(), anyString()))
 			.thenReturn(filteredList);
 		
 		mockMvc.perform(get(API_ENDPOINT_SEARCHBY_POSTCODERANGE)
-						.param("fromPostcode", "1000")
-						.param("toPostcode", "2000"))
-				.andExpect(status().isOk())
-				.andDo(print())
-				.andExpect(jsonPath("$.batteries[0]", is("El Paso")))
-                .andExpect(jsonPath("$.batteries[1]", is("Henderson")))
-                .andExpect(jsonPath("$.totalWattCapacity", is(5000.0)))
-                .andExpect(jsonPath("$.avgWattCapacity", is(2500.0))); 
+					.param("fromPostcode", "1000")
+					.param("toPostcode", "2000"))
+				.andExpect(status().isOk()).andDo(print()).andExpect(jsonPath("$.batteries[0]", is("El Paso")))
+				.andExpect(jsonPath("$.batteries[1]", is("Henderson")))
+				.andExpect(jsonPath("$.totalWattCapacity", is(5000.0)))
+				.andExpect(jsonPath("$.avgWattCapacity", is(2500.0))); 
 		
 	}
 	

@@ -12,11 +12,11 @@ import com.proshore.model.Battery;
 @Repository
 public interface BatteryRepository extends JpaRepository<Battery, Long>{
 	/**
-	 * Uses native SQL query that queries for battery records
-	 * casts String from and to values into integer 
-	 * and orders results by name in ascending order 
+	 * Uses native SQL query that queries for battery records casts String from and
+	 * to values into integer and orders results by name in ascending order
+	 * 
 	 * @param from String value
-	 * @param to String value
+	 * @param to   String value
 	 * @return list of battery entity
 	 */
 	@Query(value = 

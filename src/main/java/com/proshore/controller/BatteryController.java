@@ -98,25 +98,24 @@ public class BatteryController implements BatterySwaggerAPI {
         }
         log.info("Batteries found matching the parameters");
         // Extracting names of batteries
-        List<String> names = batteriesList.stream()
-        							.map(Battery::getName)
-        							.sorted()
-        							.collect(Collectors.toList());
-        // Calculating the total watt capacity of extracted batteries
-        double totalWattCapacity = batteriesList.stream()
-        								.mapToLong(Battery::getCapacity)
-        								.sum();
-        // Calculating the average watt capacity of extracted batteries
-        double avgWattCapacity = batteriesList.stream()
-        								.mapToDouble(Battery::getCapacity)
-        								.average()
-        								.orElse(0.0);
-        // Generating custom response
-        Map<String, Object> searchResult = Map.of(
-								                "batteries", names,
-								                "totalWattCapacity", totalWattCapacity,
-								                "avgWattCapacity", avgWattCapacity
-									        );
+		List<String> names = batteriesList.stream()
+				.map(Battery::getName)
+				.sorted()
+				.collect(Collectors.toList());
+		// Calculating the total watt capacity of extracted batteries
+		double totalWattCapacity = batteriesList.stream()
+				.mapToLong(Battery::getCapacity)
+				.sum();
+		// Calculating the average watt capacity of extracted batteries
+		double avgWattCapacity = batteriesList.stream()
+				.mapToDouble(Battery::getCapacity)
+				.average()
+				.orElse(0.0);
+		// Generating custom response
+		Map<String, Object> searchResult = Map.of(
+				"batteries", names, 
+				"totalWattCapacity", totalWattCapacity,
+				"avgWattCapacity", avgWattCapacity);
         log.info("Calculated total watt capacity and average watt capacity");
         /* Alternatively, can use: */
         // return new ResponseEntity<>(searchResult, HttpStatus.OK);
@@ -126,9 +125,9 @@ public class BatteryController implements BatterySwaggerAPI {
     @GetMapping("/searchByName")
     public ResponseEntity<BatteryDTO> findBatteryByName(@RequestParam String name) {
     	// Retrieving battery using name
-    	Battery battery = batteryService.findByName(name)
-    						.orElseThrow(() -> 
-    							new BatteryNotFoundException("No Battery records found matching given name"));
+		Battery battery = batteryService.findByName(name)
+				.orElseThrow(() -> 
+				new BatteryNotFoundException("No Battery records found matching given name"));
     	log.info("Battery found matching the name");
     	return ResponseEntity.ok().body(batteryMapper.toDto(battery));
     }

@@ -17,7 +17,7 @@ import lombok.Setter;
 public class Battery {
 
 	@Id
-    @GeneratedValue(strategy =  GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String name;
 	private String postcode;

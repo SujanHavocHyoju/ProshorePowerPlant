@@ -67,15 +67,14 @@ class BatteryServiceTest extends TestUtils{
 	void findByPostcodeRange_should_filter_battery_list() {
 		List<Battery> batteryList = generateBatteryList();
 		List<Battery> filteredList = batteryList.stream()
-										.filter( b -> {
-											try {
-								                int postcode = Integer.parseInt(b.getPostcode());
-								                return postcode > 1500 && postcode < 2100;
-								            } catch (NumberFormatException e) {
-								                return false;
-								            }
-										})
-										.collect(Collectors.toList());
+				.filter(b -> {
+					try {
+						int postcode = Integer.parseInt(b.getPostcode());
+						return postcode > 1500 && postcode < 2100;
+					} catch (NumberFormatException e) {
+						return false;
+					}
+				}).collect(Collectors.toList());
 		when(batteryRepository.findByPostcodeBetweenOrderByName("1500", "2100"))
 			.thenReturn(filteredList);
 		List<Battery> list = batteryService.findBatteryByPostcodeRange("1500", "2100");
